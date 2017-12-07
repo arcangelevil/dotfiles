@@ -1,0 +1,6 @@
+bashrc
+vimrc
+vim
+minttyrc
+tmux.conf
+
