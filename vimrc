@@ -162,7 +162,7 @@ noremap   <Right>  <NOP>
 
 "       lightline
 let g:lightline = {
-    \ 'colorscheme': 'blackboard',
+    \ 'colorscheme': 'wombat',
     \ }
 
 "       Ctrl-P - Easier file opening with soft search feature

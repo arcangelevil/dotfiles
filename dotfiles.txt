@@ -3,4 +3,5 @@ vimrc
 vim
 minttyrc
 tmux.conf
+tmux
 
