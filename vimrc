@@ -161,6 +161,9 @@ noremap   <Right>  <NOP>
 " Used plugins:
 
 "       lightline
+let g:lightline = {
+    \ 'colorscheme': 'blackboard',
+    \ }
 
 "       Ctrl-P - Easier file opening with soft search feature
 
