@@ -63,12 +63,12 @@ set -o vi
 #
 # Uncomment to turn on programmable completion enhancements.
 # Any completions you add in ~/.bash_completion are sourced last.
-# [[ -f /etc/bash_completion ]] && . /etc/bash_completion
+[[ -f /etc/bash_completion ]] && . /etc/bash_completion
 
 # History Options
 #
 # Don't put duplicate lines in the history.
-# export HISTCONTROL=$HISTCONTROL${HISTCONTROL+,}ignoredups
+export HISTCONTROL=$HISTCONTROL${HISTCONTROL+,}ignoredups
 #
 # Ignore some controlling instructions
 # HISTIGNORE is a colon-delimited list of patterns which should be excluded.
@@ -78,6 +78,38 @@ set -o vi
 #
 # Whenever displaying the prompt, write the previous line to disk
 # export PROMPT_COMMAND="history -a"
+
+#base03#    #002b36
+#base02:    #073642
+#base01:    #586e75
+#base00:    #657b83
+#base0:     #839496
+#base1:     #93a1a1
+#base2:     #eee8d5
+#base3:     #fdf6e3
+
+#yellow:    #b58900
+#orange:    #cb4b16
+#red:       #dc322f
+#magenta:   #d33682
+#violet:    #6c71c4
+#blue:      #268bd2
+#cyan:      #2aa198
+#green:     #859900
+
+# base01='\[\e[38;2;88;110;117m\]' #586e75
+# base00='\[\e[38;2;101;123;131m\]'
+# Wrapper color
+WC='\[\e[38;2;88;110;117m\]'
+
+# Clear everything
+PS1='\[\e[0m\e]0;\w\a\]'
+PS1=$PS1$WC'┌→($(if [ $? = 0 ]; then echo "\[\033[01;32m\]✔"; else echo "\[\033[01;31m\]✘"; fi)'$WC')\n'
+PS1=$PS1$WC'├─(\[\e[38;2;28;59;121m\]\j'$WC')─(\[\e[38;2;132;167;193m\]\u\[\e[38;2;0;212;45m\]@\h'$WC')─[\[\e[38;2;0;95;20m\]\l'$WC']─(\[\e[38;2;202;254;30m\]\w'$WC')\n'
+PS1=$PS1$WC'└─($(printf "%.4d" \!)'$WC') \$ '
+PS1=$PS1'\[\e[0m\]'
+export PS1;
+export PS2='      >'
 
 # Aliases
 #
@@ -198,3 +230,5 @@ alias ll='ls -lF --color=always'                              # long list
 # }
 # 
 # alias cd=cd_func
+
+

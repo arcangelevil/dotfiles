@@ -2,7 +2,7 @@ Term=xterm
 Locale=es_MX
 Charset=UTF-8
 
-BoldAsFont=-1
+BoldAsFont=yes
 Font=Consolas
 CursorType=block
 
@@ -10,3 +10,6 @@ ForegroundColour=255,255,255
 BackgroundColour=11,16,34
 CursorColour=0,0,0
 
+FontWeight=400
+FontIsBold=no
+BoldAsColour=no
