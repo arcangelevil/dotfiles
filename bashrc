@@ -1,26 +1,4 @@
-# To the extent possible under law, the author(s) have dedicated all 
-# copyright and related and neighboring rights to this software to the 
-# public domain worldwide. This software is distributed without any warranty. 
-# You should have received a copy of the CC0 Public Domain Dedication along 
-# with this software. 
-# If not, see <http://creativecommons.org/publicdomain/zero/1.0/>. 
-
-# base-files version 4.2-4
-
 # ~/.bashrc: executed by bash(1) for interactive shells.
-
-# The latest version as installed by the Cygwin Setup program can
-# always be found at /etc/defaults/etc/skel/.bashrc
-
-# Modifying /etc/skel/.bashrc directly will prevent
-# setup from updating it.
-
-# The copy in your home directory (~/.bashrc) is yours, please
-# feel free to customise it to create a shell
-# environment to your liking.  If you feel a change
-# would be benifitial to all, please feel free to send
-# a patch to the cygwin mailing list.
-
 # User dependent .bashrc file
 
 # If not running interactively, don't do anything
@@ -79,34 +57,36 @@ export HISTCONTROL=$HISTCONTROL${HISTCONTROL+,}ignoredups
 # Whenever displaying the prompt, write the previous line to disk
 # export PROMPT_COMMAND="history -a"
 
-#base03#    #002b36
-#base02:    #073642
-#base01:    #586e75
-#base00:    #657b83
-#base0:     #839496
-#base1:     #93a1a1
-#base2:     #eee8d5
-#base3:     #fdf6e3
+base03='\[\e[38;2;0;43;54m\]'       #base03:    #002b36 background
+base02='\[\e[38;2;7;54;66m\]'       #base02:    #073642 background highlights
+base01='\[\e[38;2;88;110;117m\]'    #base01:    #586e75 comment / secondary comment
+base00='\[\e[38;2;101;123;131m\]'   #base00:    #657b83
+base0='\[\e[38;2;131;148;150m\]'    #base0:     #839496 body / default text
+base1='\[\e[38;2;147;161;161m\]'    #base1:     #93a1a1 optional emphasized content
+base2='\[\e[38;2;238;232;213m\]'    #base2:     #eee8d5
+base3='\[\e[38;2;253;246;227m\]'    #base3:     #fdf6e3
 
-#yellow:    #b58900
-#orange:    #cb4b16
-#red:       #dc322f
-#magenta:   #d33682
-#violet:    #6c71c4
-#blue:      #268bd2
-#cyan:      #2aa198
-#green:     #859900
+yellow='\[\e[38;2;181;137;0m\]'     #yellow:    #b58900
+orange='\[\e[38;2;203;75;22m\]'     #orange:    #cb4b16
+red='\[\e[38;2;220;50;47m\]'        #red:       #dc322f
+magenta='\[\e[38;2;211;54;130m\]'   #magenta:   #d33682
+violet='\[\e[38;2;108;113;196m\]'   #violet:    #6c71c4
+blue='\[\e[38;2;38;139;210m\]'      #blue:      #268bd2
+cyan='\[\e[38;2;42;161;152m\]'      #cyan:      #2aa198
+green='\[\e[38;2;133;153;0m\]'      #green:     #859900
 
-# base01='\[\e[38;2;88;110;117m\]' #586e75
-# base00='\[\e[38;2;101;123;131m\]'
 # Wrapper color
-WC='\[\e[38;2;88;110;117m\]'
+WC=$base01
 
 # Clear everything
 PS1='\[\e[0m\e]0;\w\a\]'
-PS1=$PS1$WC'┌→($(if [ $? = 0 ]; then echo "\[\033[01;32m\]✔"; else echo "\[\033[01;31m\]✘"; fi)'$WC')\n'
-PS1=$PS1$WC'├─(\[\e[38;2;28;59;121m\]\j'$WC')─(\[\e[38;2;132;167;193m\]\u\[\e[38;2;0;212;45m\]@\h'$WC')─[\[\e[38;2;0;95;20m\]\l'$WC']─(\[\e[38;2;202;254;30m\]\w'$WC')\n'
-PS1=$PS1$WC'└─($(printf "%.4d" \!)'$WC') \$ '
+PS1=$PS1$WC'┌─($(if [ $? = 0 ]; then echo "'$green'✔"; else echo "'$red'✘"; fi)'$WC')'
+PS1=$PS1'─('$blue'\j'$WC')\n'
+PS1=$PS1$WC'├─['$green'\l'$WC']'
+PS1=$PS1'─('$cyan'\u'$orange'@\h'$WC')'
+PS1=$PS1'─('$yellow'\w'$WC')'
+PS1=$PS1'$(git branch 2> /dev/null | sed -e "/^[^*]/d" -e "s/* \(.*\)/'$WC'─('$red'\1'$WC')/")\n'
+PS1=$PS1$WC'└─('$violet'$(printf "%.4d" \!)'$WC') \$ '
 PS1=$PS1'\[\e[0m\]'
 export PS1;
 export PS2='      >'
@@ -136,17 +116,19 @@ export PS2='      >'
 # Misc :)
 # alias less='less -r'                          # raw control characters
 # alias whence='type -a'                        # where, of a sort
-# alias grep='grep --color'                     # show differences in colour
-# alias egrep='egrep --color=auto'              # show differences in colour
-# alias fgrep='fgrep --color=auto'              # show differences in colour
+alias grep='grep --color'                     # show differences in colour
+alias egrep='egrep --color=auto'              # show differences in colour
+alias fgrep='fgrep --color=auto'              # show differences in colour
+# export GREP_COLOR="1;32"
 #
 # Some shortcuts for different directory listings
-# alias ls='ls -hF --color=tty'                 # classify files in colour
+alias ls='ls -hF --color=auto'                 # classify files in colour
 # alias dir='ls --color=auto --format=vertical'
 # alias vdir='ls --color=auto --format=long'
-alias ll='ls -lF --color=always'                              # long list
+alias ll='ls -lhF --color=auto'                              # long list
 # alias la='ls -A'                              # all but . and ..
 # alias l='ls -CF'                              #
+alias diff='diff --color=auto'
 
 # Umask
 #

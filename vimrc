@@ -1,3 +1,13 @@
+if has("gui_running")
+  if has("gui_gtk2")
+    set guifont=Inconsolata\ 12
+  elseif has("gui_macvim")
+    set guifont=Menlo\ Regular:h14
+  elseif has("gui_win32")
+    set guifont=Consolas:h11:cANSI
+  endif
+endif
+
 " First things first
 set nocompatible        " This is vim not vi
 set encoding=utf-8      " Always use utf-8
@@ -73,10 +83,12 @@ set shell=bash          " Use this shell as default
 " Visual interface settings
 "
 " Coloring and theme related settings
-colors blackboard        " Use this theme
-highlight NonText guifg=#4a4a59
-highlight SpecialKey guifg=#4a4a59
+"colors blackboard        " Use this theme
 set termguicolors
+set background=dark
+colorscheme solarized
+"highlight NonText guifg=#4a4a59
+"highlight SpecialKey guifg=#4a4a59
 
 " Patch to force tmux to show colors
 " The "^[" is a single character. You enter it by pressing Ctrl+v and then ESC.
@@ -125,19 +137,22 @@ let mapleader=','
 let maplocalleader='\\'
 
 " Y behaves more naturally
-map Y y$
+noremap Y y$
 " j and k move through visual lines (not actual lines)
-nmap j gj
-nmap k gk
+nnoremap j gj
+nnoremap k gk
 " toggle highlight search
-nmap <Leader>h :nohls<CR>
+nnoremap <Leader>h :nohls<CR>
 " toggle relative line numbering
-nmap <Leader>n :setlocal relativenumber!<CR>
+nnoremap <Leader>r :setlocal relativenumber!<CR>
 " Change next buffer
-nmap <C-b> :b#<CR>
-nmap <C-m> :bnext<CR>
-nmap <C-n> :bprev<CR>
-nmap <C-w> :bd<CR>
+nnoremap <Leader>b :b#<CR>
+nnoremap <Leader>n :bnext<CR>
+nnoremap <Leader>p :bprev<CR>
+nnoremap <Leader>w :bd<CR>
+" Edit vimrc
+nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+nnoremap <leader>sv :source $MYVIMRC<cr>
 
 " Write a privileged file with :SudoW or :SudoWrite, it will prompt for sudo password when writing
 inoremap  <Up>     <NOP>
@@ -162,7 +177,7 @@ noremap   <Right>  <NOP>
 
 "       lightline
 let g:lightline = {
-    \ 'colorscheme': 'wombat',
+    \ 'colorscheme': 'solarized',
     \ }
 
 "       Ctrl-P - Easier file opening with soft search feature
