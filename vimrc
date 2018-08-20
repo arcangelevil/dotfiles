@@ -191,9 +191,6 @@ noremap <Leader>cc :TComment col=0<CR>
 " Append a comment at the end of line
 noremap <Leader>cA o <Esc>:TComment<CR>kJA<Backspace>
 
-"       NERD Tree - Integrated file explorer
-noremap <Leader>nt :NERDTreeToggle<CR>
-
 "       DelimitMate - Conviniently autoclose (),{},[],"", and ''
 
 "       unimpaired - Some usefull keymaps for common operations

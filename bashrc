@@ -78,16 +78,30 @@ green='\[\e[38;2;133;153;0m\]'      #green:     #859900
 # Wrapper color
 WC=$base01
 
+ps1_git_branch () {
+    git rev-parse --abbrev-ref HEAD 2> /dev/null
+}
+
+test_git_changed () {
+    readarray files_pending < <(git status --porcelain)
+    [ ${#files_pending[@]} -eq 0 ]
+}
+
 # Clear everything
-PS1='\[\e[0m\e]0;\w\a\]'
+PS1='\[\e[0m\e]0;\w\a\]\n'
 PS1=$PS1$WC'┌─($(if [ $? = 0 ]; then echo "'$green'✔"; else echo "'$red'✘"; fi)'$WC')'
-PS1=$PS1'─('$blue'\j'$WC')\n'
-PS1=$PS1$WC'├─['$green'\l'$WC']'
-PS1=$PS1'─('$cyan'\u'$orange'@\h'$WC')'
+PS1=$PS1'─('$violet'\j'$WC')\n'
+PS1=$PS1$WC'├─['$orange'\l'$WC']'
+PS1=$PS1'─('$blue'\u@\h'$WC')'
 PS1=$PS1'─('$yellow'\w'$WC')'
-PS1=$PS1'$(git branch 2> /dev/null | sed -e "/^[^*]/d" -e "s/* \(.*\)/'$WC'─('$red'\1'$WC')/")\n'
+SSHPS1=$PS1'\n'
+# git
+PS1=$PS1'$(if branch=$(ps1_git_branch); then echo "'$WC'─($(if test_git_changed; then echo "'$cyan'"; else echo "'$magenta'"; fi)$branch'$WC')"; fi)\n'
+
 PS1=$PS1$WC'└─('$violet'$(printf "%.4d" \!)'$WC') \$ '
+SSHPS1=$SSHPS1$WC'└─('$violet'$(printf "%.4d" \!)'$WC') \$ '
 PS1=$PS1'\[\e[0m\]'
+SSHPS1=$SSHPS1'\[\e[0m\]'
 export PS1;
 export PS2='      >'
 
@@ -129,6 +143,11 @@ alias ll='ls -lhF --color=auto'                              # long list
 # alias la='ls -A'                              # all but . and ..
 # alias l='ls -CF'                              #
 alias diff='diff --color=auto'
+
+function myssh {
+    ssh -t $1 "export PS1='$SSHPS1'; exec bash -l"
+}
+
 
 # Umask
 #
