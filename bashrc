@@ -92,9 +92,11 @@ PS1='\[\e[0m\e]0;\w\a\]\n'
 PS1=$PS1$WC'┌─($(if [ $? = 0 ]; then echo "'$green'✔"; else echo "'$red'✘"; fi)'$WC')'
 PS1=$PS1'─('$violet'\j'$WC')\n'
 PS1=$PS1$WC'├─['$orange'\l'$WC']'
-PS1=$PS1'─('$blue'\u@\h'$WC')'
+SSHPS1=$PS1
+PS1=$PS1'─('$blue'\u'$WC')'
+SSHPS1=$SSHPS1'─('$green'\u@$(hostname -i)'$WC')'
 PS1=$PS1'─('$yellow'\w'$WC')'
-SSHPS1=$PS1'\n'
+SSHPS1=$SSHPS1'─('$yellow'\w'$WC')\n'
 # git
 PS1=$PS1'$(if branch=$(ps1_git_branch); then echo "'$WC'─($(if test_git_changed; then echo "'$cyan'"; else echo "'$magenta'"; fi)$branch'$WC')"; fi)\n'
 
