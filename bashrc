@@ -145,6 +145,8 @@ alias ll='ls -lhF --color=auto'                              # long list
 # alias la='ls -A'                              # all but . and ..
 # alias l='ls -CF'                              #
 alias diff='diff --color=auto'
+alias vi=nvim
+alias vim=nvim
 
 function myssh {
     ssh -t $1 "export PS1='$SSHPS1'; exec bash -l"
@@ -234,4 +236,14 @@ function myssh {
 # 
 # alias cd=cd_func
 
+# start tmux for any interactive session
+if which tmux >/dev/null 2>&1; then
+    # if no session is started, start a new session
+    test -z ${TMUX} && tmux
+
+    # when quitting tmux, try to attach
+    while test -z ${TMUX}; do
+        tmux attach || break
+    done
+fi
 

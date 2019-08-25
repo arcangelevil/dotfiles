@@ -20,24 +20,27 @@ files=$(cat "$dotdir/dotfiles.txt")
 
 # Repeat the action for all configured files
 for f in $files; do
-    # Filename without the . prefix
-    df="$dotdir/$f"
+    # System (dotted) filename
+    df=~/."$f"
+    # Versioned (undotted) filename
+    uf="$dotdir/$f"
 
     # If exists delete
-    if [ -e "$df" ]; then
-        echo "Deliting old $df file"
-        if [ -d "$df" ]; then
-            rm -rf "$df"
+    if [ -e "$uf" ]; then
+        echo "Deliting old $uf file"
+        if [ -d "$uf" ]; then
+            rm -rf "$uf"
         else
-            rm "$df"
+            rm "$uf"
         fi
     fi
 
     # Copy the file to the dotfiles directory
-    if [ -d ~/."$f" ]; then
-        cp -r ~/."$f" "$df"
+    mkdir -p $(dirname "$uf")
+    if [ -d "$df" ]; then
+        cp -r "$df" "$uf"
     else
-        cp ~/."$f" "$df"
+        cp "$df" "$uf"
     fi
 done
 

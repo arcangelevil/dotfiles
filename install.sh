@@ -24,16 +24,22 @@ mkdir -p $old_dotdir
 
 # move any existing dotfiles in homedir to dotfiles_old directory, then copy new ones
 for f in $files; do
+    # System (dotted) filename
+    df=~/."$f"
+    # Versioned (undotted) filename
+    uf="$dotdir/$f"
+
     echo "Moving any existing dotfile $f from ~ to $old_dotdir"
-    if [ -e ~/."$f" ]; then
-        mv ~/."$f" "$old_dotdir"
+    if [ -e "$df" ]; then
+        mv "$df" "$old_dotdir"
     fi
 
-    echo "Creating new $f in ~ directory."
+    echo "Creating new $f in ~ directory ."
+    mkdir -p $(dirname "$df")
     if [ -d "$dotdir/$f" ]; then
-        cp -r "$dotdir/$f" ~/."$f"
+        cp -r "$uf" "$df"
     else
-        cp "$dotdir/$f" ~/."$f"
+        cp "$uf" "$df"
     fi
 done
 

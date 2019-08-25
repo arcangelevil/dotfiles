@@ -1,3 +1,5 @@
+config/kitty/kitty.conf
+config/nvim/init.vim
 bashrc
 vimrc
 vim
