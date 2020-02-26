@@ -242,8 +242,8 @@ if which tmux >/dev/null 2>&1; then
     test -z ${TMUX} && tmux
 
     # when quitting tmux, try to attach
-    while test -z ${TMUX}; do
-        tmux attach || break
-    done
+    #while test -z ${TMUX}; do
+    #    tmux attach || break
+    #done
 fi
 

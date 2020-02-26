@@ -14,6 +14,7 @@ set encoding=utf-8      " Always use utf-8
 set modelines=0         " No modelines (embedded vimscript)
 set backspace=indent,eol,start  " Backspace behaves conventionally
 set ttyfast             " Use optimizations for fast consoles
+set clipboard=unnamedplus " Usar el registro + para copiar al portapapeles
 
 " Config pathogen for neat plugin install in ~/.vim/bundle/
 execute pathogen#infect()
